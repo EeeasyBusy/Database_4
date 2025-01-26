@@ -12,7 +12,7 @@ import java.util.List;
 public class Controller {
     Controller controller;
     @GetMapping("/persons/by-city")
-    public List<Person> getPersonsByCity(@RequestParam("city_of_living") String city_of_living) throws SQLException {
-        return controller.getPersonsByCity(city_of_living);
+    public List<Person> getPersonsByCity(@RequestParam("city_of_living") String cityOfLiving) throws SQLException {
+        return controller.getPersonsByCity(cityOfLiving);
     }
 }

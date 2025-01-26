@@ -4,17 +4,17 @@ import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+@Getter
+@Setter
+@RequiredArgsConstructor
 @Entity
 public class Person implements Serializable {
 
@@ -24,6 +24,18 @@ public class Person implements Serializable {
     @Column
     private long phoneNumber;
     @Column(nullable = false)
-    private String city_of_living;
+    private String cityOfLiving;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Person person = (Person) o;
+        return phoneNumber == person.phoneNumber && Objects.equals(contact, person.contact) && Objects.equals(cityOfLiving, person.cityOfLiving);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(contact, phoneNumber, cityOfLiving);
+    }
 }
